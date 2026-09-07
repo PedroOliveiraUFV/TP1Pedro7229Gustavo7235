@@ -61,7 +61,7 @@ void set_cord(Pokemon *poke, int x, int y) {
 }
 
 void imprime_poke(Pokemon *poke) {
-    printf("Id: %d\n", poke -> id);
+    printf("\nId: %d\n", poke -> id);
     printf("Numero da pokedex: %d\n", poke -> n_pokedex);
     printf("Nome: %s\n", poke -> nome);
     printf("Tipo: %s\n", poke -> tipo);
