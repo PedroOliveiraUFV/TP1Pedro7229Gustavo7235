@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "DADOPOKEMON.h"
+#include "../Headers/DADOPOKEMON.h"
 
 static int id = 1;
 
@@ -26,11 +26,11 @@ int get_n_pokedex(Pokemon *poke) {
 }
 
 void get_nome(Pokemon *poke, char resposta[]) {
-    strcpy((*resposta), (*poke).nome);
+    strcpy(resposta, (*poke).nome);
 }
 
 void get_tipo(Pokemon *poke, char resposta[]) {
-    strcpy((*resposta), (*poke).tipo);
+    strcpy(resposta, (*poke).tipo);
 }
 
 int get_cordx(Pokemon *poke) {
@@ -61,9 +61,9 @@ void set_cord(Pokemon *poke, int x, int y) {
 }
 
 void imprime_poke(Pokemon *poke) {
-    printf("\nId: %d\n", poke -> id);
+    printf("Id: %d\n", poke -> id);
     printf("Numero da pokedex: %d\n", poke -> n_pokedex);
     printf("Nome: %s\n", poke -> nome);
     printf("Tipo: %s\n", poke -> tipo);
-    printf("Localizacao (%d, %d):\n", poke -> cord_x, poke -> cord_y);
+    printf("Localizacao (%d, %d):\n\n", poke -> cord_x, poke -> cord_y);
 }
