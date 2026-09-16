@@ -18,10 +18,12 @@ void capturaPokemon(Treinador* treinador, Pokemon poke);
 void retiraPokemonDaListaTreinador(Treinador* treinador, Pokemon* resul);
 void imprimeTreinador(Treinador* treinador);
 
+//gets//
 void getCord(Treinador* treinador, int* x, int* y);
-void setCord(Treinador* treinador, int x, int y);
-
 int getPokebolas(Treinador* treinador);
+
+//sets//
+void setCord(Treinador* treinador, int x, int y);
 void setPokebolas(Treinador* treinador, int quant);
 
 #endif

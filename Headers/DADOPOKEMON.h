@@ -27,6 +27,8 @@ void set_nome(Pokemon *poke, char nome[]);
 void set_tipo(Pokemon *poke, char tipo[]);
 void set_cord(Pokemon *poke, int x, int y);
 
+//impressao//
+
 void imprime_poke(Pokemon *poke);
 
 #endif

@@ -3,8 +3,11 @@
 
 #include "../Headers/DADOPOKEMON.h"
 
+//variavel id para ids unicos//
 static int id = 1;
 
+
+//inicializa o pokemon//
 void inicializa_pokemon(Pokemon *poke, int numero, char nome[], char tipo[], int x, int y) {
     poke -> id = id;
 
@@ -60,6 +63,7 @@ void set_cord(Pokemon *poke, int x, int y) {
     poke -> cord_y = y;
 }
 
+//impressao//
 void imprime_poke(Pokemon *poke) {
     printf("Id: %d\n", poke -> id);
     printf("Numero da pokedex: %d\n", poke -> n_pokedex);

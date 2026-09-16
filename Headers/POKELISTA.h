@@ -5,13 +5,16 @@
 
 #include "DADOPOKEMON.h"
 
+//Para citar a struct dentro dela mesma//
 typedef struct CelulaPokemon CelulaPokemon;
 
+//Celulas da lista, nao sao usadas fora do tad//
 typedef struct CelulaPokemon {
     Pokemon pokemon;
     CelulaPokemon* prox;
 } CelulaPokemon;
 
+//struct da lista
 typedef struct ListaPokemon{
     CelulaPokemon* cabecalho;
     CelulaPokemon* ultimo;
