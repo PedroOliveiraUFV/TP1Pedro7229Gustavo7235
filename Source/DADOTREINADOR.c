@@ -6,14 +6,14 @@
 static int proxId = 1;
 
 //inicializa o treinador//
-void inicializaTreinador(Treinador* treinador, char nome[]){
+void inicializaTreinador(Treinador* treinador, char nome[], int pokebolas){
     treinador->id = proxId;
     proxId++;
     strcpy(treinador->nome, nome);
     treinador->cord_x = 0;
     treinador->cord_y = 0;
     FazListaPokemonVazia(&treinador->pokemons);
-    treinador->quantPokebolas = 2;
+    treinador->quantPokebolas = pokebolas;
 }
 
 //movimenta(teleporta) o treinador//
