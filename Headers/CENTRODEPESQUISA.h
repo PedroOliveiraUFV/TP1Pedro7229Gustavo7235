@@ -14,8 +14,9 @@ typedef struct {
 } CentroPesquisa;
 
 void inicializaCentroPesquisa(CentroPesquisa* centro);
-void inserirFugitivo(CentroPesquisa* centro);
+void inserirFugitivo(CentroPesquisa* centro, Pokemon poke);
 void retiraFugitivo(CentroPesquisa* centro, Pokemon* poke);
+int fugitivosVazio(CentroPesquisa* centro);
 void imprimePokemonsFugitivos(CentroPesquisa* centro);
 void recebePokemonsRecuperados(CentroPesquisa* centro, ListaPokemon* lista);
 void recarregarPokebolas(Treinador* treinador);

@@ -2,12 +2,19 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "DADOPOKEMON.h"
-#include "POKELISTA.h"
-#include "DADOTREINADOR.h"
 #include "CENTRODEPESQUISA.h"
 
 #define MAX_TREINADOR 2
+
+void inicioMissao(){
+    printf("========================================\n");
+    printf("          INÍCIO DA MISSÃO              \n");
+    printf("========================================\n\n");
+}
+
+void linha(){
+    printf("\n----------------------------------------\n");
+}
 
 int ler_treinadores(FILE *arq, Treinador **treinadores) {
     char nome[50];
@@ -17,11 +24,7 @@ int ler_treinadores(FILE *arq, Treinador **treinadores) {
         if (fscanf(arq, "%49s %d", nome, &pokebolas) != 2) {
             return 0;
         }
-        inicializaTreinador(&treinadores[i+1], nome, pokebolas);
-
-        if (treinadores[i] == NULL ) {
-            return 0;
-        }
+        inicializaTreinador(&treinadores[i], nome, pokebolas);
     }
     return 1;
 }
@@ -49,7 +52,7 @@ int ler_pokemons(FILE *arq, CentroPesquisa *centro) {
     return 1;
 }
 
-double calcula_distacia (Treinador *treinadores, int x, int y) {
+double calcula_distancia (Treinador *treinadores, int x, int y) {
     double dx, dy;
 
     dx = x - treinadores -> cord_x;
@@ -61,8 +64,8 @@ double calcula_distacia (Treinador *treinadores, int x, int y) {
 Treinador *escolhe_treinador(Treinador *treina1, Treinador *treina2, Pokemon *poke) {
     double distancia1, distancia2;
 
-    distancia1 = calcula_distacia(treina1, get_cordx(poke), get_cordy(poke));
-    distancia2 = calcula_distacia(treina2, get_cordx(poke), get_cordy(poke));
+    distancia1 = calcula_distancia(treina1, get_cordx(poke), get_cordy(poke));
+    distancia2 = calcula_distancia(treina2, get_cordx(poke), get_cordy(poke));
 
     if (distancia1 < distancia2) {
         return treina1;
@@ -75,8 +78,40 @@ Treinador *escolhe_treinador(Treinador *treina1, Treinador *treina2, Pokemon *po
 
 int main() {
 
-    FILE *arq;
+    //lendo o arquivo de entrada
+    FILE *arq = fopen("exemplo.txt", "r");
 
     CentroPesquisa centro;
+    inicializaCentroPesquisa(&centro);
 
+    Treinador treinador[MAX_TREINADOR];
+
+    if (!ler_treinadores(arq, treinador)) {
+        printf("Erro ao ler treinadores!\n");
+        fclose(arq);
+        return 1;
+    }
+
+    if (!ler_pokemons(arq, &centro)) {
+        printf("Erro ao ler pokemons!\n");
+        fclose(arq);
+        return 1;
+    }
+
+    fclose(arq);
+
+    //iniciando a missão
+    inicioMissao();
+    for(int i = 0; i<MAX_TREINADOR;i++){
+        imprimeTreinador(&treinador[i]);
+    }
+    linha();
+
+    //Pokemons alvos
+    while(fugitivosVazio(&centro)!=1){
+        Pokemon fugitivo;
+        retiraFugitivo(&centro, &fugitivo);
+        printf("Pokemon alvo: %s\n", fugitivo.nome);
+        printf("Localização: (%d,%d)\n\n", fugitivo.cord_x, fugitivo.cord_y);
+    }
 }

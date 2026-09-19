@@ -25,5 +25,6 @@ void InsereNaListaPokemon(ListaPokemon* lista, Pokemon poke);
 void RemoverDaListaPokemon(ListaPokemon* lista, Pokemon* poke);
 void ImprimirListaPokemon(ListaPokemon* lista);
 int ListaPokemonVazia(ListaPokemon* lista);
+int contaPokemonsDaLista(ListaPokemon* lista);
 
 #endif

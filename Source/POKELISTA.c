@@ -52,3 +52,13 @@ void ImprimirListaPokemon(ListaPokemon* lista){
         p = p->prox;
     }
 }
+
+int contaPokemonsDaLista(ListaPokemon *lista) {
+    CelulaPokemon *a = lista->cabecalho;
+    int cont = 0;
+    while (a->prox != NULL) {
+        cont++;
+        a = a->prox;
+    }
+    return cont;
+}
