@@ -35,7 +35,7 @@ int ler_pokemons(FILE *arq, CentroPesquisa *centro) {
     }
 
     for (int i = 0; i < quant; ++i) {
-        if (fscanf(arq, "%d %49s %29s %d %d") != 5) {
+        if (fscanf(arq, "%d %49s %29s %d %d", &num_pokedex, nome, tipo, &x, &y) != 5) {
             return 0;
         }
 
