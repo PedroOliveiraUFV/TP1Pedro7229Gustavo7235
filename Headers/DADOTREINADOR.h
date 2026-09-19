@@ -12,7 +12,7 @@ typedef struct Treinador{
     int quantPokebolas;
 } Treinador;
 
-void inicializaTreinador(Treinador* treinador, char nome[]);
+void inicializaTreinador(Treinador* treinador, char nome[], int pokebolas);
 void movimenta(Treinador* treinador, int x, int y);
 void capturaPokemon(Treinador* treinador, Pokemon poke);
 void retiraPokemonDaListaTreinador(Treinador* treinador, Pokemon* resul);
