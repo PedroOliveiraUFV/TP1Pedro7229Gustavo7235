@@ -4,7 +4,7 @@
 typedef struct {
     int id;
     int n_pokedex;
-    char nome[100];
+    char nome[50];
     char tipo[30];
     int cord_x;
     int cord_y;
