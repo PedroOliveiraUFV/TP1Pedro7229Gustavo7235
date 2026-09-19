@@ -16,6 +16,24 @@ void linha(){
     printf("\n----------------------------------------\n");
 }
 
+void treinadorSemPokebolas(Treinador* trei){
+    printf("\n========================================\n");
+    printf("       Treinador(a) %s SEM POKÉBOLAS  \n", trei->nome);
+    printf("========================================\n\n");
+}
+
+void todosPokemonsResuperados(){
+    printf("========================================\n");
+    printf("     Todos Pokemons foram resgatados    \n");
+    printf("========================================\n\n");
+}
+
+void missaoConcluida(){
+    printf("========================================\n");
+    printf("          MISSÃO CONCLUÍDA              \n");
+    printf("========================================\n\n");
+}
+
 int ler_treinadores(FILE *arq, Treinador **treinadores) {
     char nome[50];
     int pokebolas;
@@ -52,27 +70,28 @@ int ler_pokemons(FILE *arq, CentroPesquisa *centro) {
     return 1;
 }
 
-double calcula_distancia (Treinador *treinadores, int x, int y) {
+double calcula_distancia (int x1, int y1, int x2, int y2) {
     double dx, dy;
 
-    dx = x - treinadores -> cord_x;
-    dy = y - treinadores -> cord_y;
+    dx = x1 - x2;
+    dy = y1 - y2;
 
     return sqrt(dx * dx + dy * dy);
 }
 
-Treinador *escolhe_treinador(Treinador *treina1, Treinador *treina2, Pokemon *poke) {
-    double distancia1, distancia2;
-
-    distancia1 = calcula_distancia(treina1, get_cordx(poke), get_cordy(poke));
-    distancia2 = calcula_distancia(treina2, get_cordx(poke), get_cordy(poke));
-
-    if (distancia1 < distancia2) {
-        return treina1;
+Treinador *escolhe_treinador(Treinador *treina, Pokemon *poke) {
+    Treinador* treinadorMaisProx = &treina[0];
+    double distanciaMaisProx = 0;
+    for(int i = 0; i<MAX_TREINADOR; i++){
+        double distancia = calcula_distancia(treina[i].cord_x, &treina[i].cord_y, poke->cord_x, poke->cord_y);
+        printf("Distância Treinador(a) %s: %.2f\n",treina[i].nome, distancia);
+        if(distancia>distanciaMaisProx){
+            treinadorMaisProx = &treina[i];
+            distanciaMaisProx = distancia;
+        }
     }
-    if (distancia2 < distancia1) {
-        return treina2;
-    }
+    printf("\n");
+    return treinadorMaisProx;
 }
 
 
@@ -113,5 +132,32 @@ int main() {
         retiraFugitivo(&centro, &fugitivo);
         printf("Pokemon alvo: %s\n", fugitivo.nome);
         printf("Localização: (%d,%d)\n\n", fugitivo.cord_x, fugitivo.cord_y);
+        Treinador *missionario = escolhe_treinador(treinador, &fugitivo);
+        printf("Missão atribuída ao Treinador(a) %s.\n\n",missionario->nome);
+        set_cord(missionario, fugitivo.cord_x, fugitivo.cord_y);
+        capturaPokemon(missionario, fugitivo);
+        printf("Pokébolas restantes para o Treinador(a) %s: %d\n", missionario->nome, getPokebolas(missionario));
+        if(getPokebolas(missionario) == 0){
+            treinadorSemPokebolas(missionario);
+            set_cord(missionario, xCentro, yCentro);
+            printf("Treinador(a) %s retorna ao Centro de Pesquisa.\n\n", missionario->nome);
+            recebePokemonsRecuperados(&centro, &missionario->pokemons);
+            printf("Entregando Pokémons ao Centro de Pesquisa.\n\n");
+        }
+        linha();
     }
+
+    //fim da missão
+    todosPokemonsResuperados();
+    for(int i = 0; i<MAX_TREINADOR; i++){
+        setCord(&treinador[i], xCentro, yCentro);
+    }
+    printf("Todos treinadores retornam ao Centro de Pesquisa.\n\n");
+    for(int i = 0; i<MAX_TREINADOR; i++){
+        recebePokemonsRecuperados(&centro, &treinador[i].pokemons);
+        printf("Treinador(a) %s devolve os Pokémon.\n\n",treinador[i].nome);
+    }
+    missaoConcluida();
+
+    //escrever relatorio de pokemons repurados no relatorio.txt 
 }

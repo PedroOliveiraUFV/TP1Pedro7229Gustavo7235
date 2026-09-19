@@ -26,6 +26,7 @@ void movimenta(Treinador* treinador, int x, int y){
 void capturaPokemon(Treinador* treinador, Pokemon poke){
     InsereNaListaPokemon(&treinador->pokemons, poke);
     treinador->quantPokebolas--;
+    printf("%s capturado com sucesso!\n\n", poke.nome);
 }
 
 //retira da lista e retorna ele por meio de ponteiro//
@@ -55,4 +56,5 @@ void setPokebolas(Treinador* treinador, int quant){
 void setCord(Treinador* treinador, int x, int y){
     treinador->cord_x = x;
     treinador->cord_y = y;
+    printf("Treinador(a) %s se movimentou para (%d,%d).\n", treinador->nome, treinador->cord_x, treinador->cord_y);
 }

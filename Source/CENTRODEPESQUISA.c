@@ -25,4 +25,5 @@ int fugitivosVazio(CentroPesquisa* centro){
 
 void recebePokemonsRecuperados(CentroPesquisa* centro, ListaPokemon* lista);
 
+//tem que fazer essa funão escrever "Treinador(a) %s recebeu %d Pokébolas.\n""
 void recarregarPokebolas(Treinador* treinador);
