@@ -7,7 +7,7 @@
 #include "DADOTREINADOR.h"
 #include "CENTRODEPESQUISA.h"
 
-#define MAX_TREINADOR = 2
+#define MAX_TREINADOR 2
 
 int ler_treinadores(FILE *arq, Treinador **treinadores) {
     char nome[50];
@@ -17,7 +17,7 @@ int ler_treinadores(FILE *arq, Treinador **treinadores) {
         if (fscanf(arq, "%49s %d", nome, &pokebolas) != 2) {
             return 0;
         }
-        treinadores[i] = inicializaTreinador(i + 1, nome, pokebolas);
+        inicializaTreinador(&treinadores[i+1], nome, pokebolas);
 
         if (treinadores[i] == NULL ) {
             return 0;
@@ -58,7 +58,7 @@ double calcula_distacia (Treinador *treinadores, int x, int y) {
     return sqrt(dx * dx + dy * dy);
 }
 
-Treinador escolhe_treinador(Treinador *treina1, Treinador *treina2, Pokemon *poke) {
+Treinador *escolhe_treinador(Treinador *treina1, Treinador *treina2, Pokemon *poke) {
     double distancia1, distancia2;
 
     distancia1 = calcula_distacia(treina1, get_cordx(poke), get_cordy(poke));
