@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "DADOPOKEMON.h"
 #include "POKELISTA.h"
@@ -48,9 +49,34 @@ int ler_pokemons(FILE *arq, CentroPesquisa *centro) {
     return 1;
 }
 
+double calcula_distacia (Treinador *treinadores, int x, int y) {
+    double dx, dy;
+
+    dx = x - treinadores -> cord_x;
+    dy = y - treinadores -> cord_y;
+
+    return sqrt(dx * dx + dy * dy);
+}
+
+Treinador escolhe_treinador(Treinador *treina1, Treinador *treina2, Pokemon *poke) {
+    double distancia1, distancia2;
+
+    distancia1 = calcula_distacia(treina1, get_cordx(poke), get_cordy(poke));
+    distancia2 = calcula_distacia(treina2, get_cordx(poke), get_cordy(poke));
+
+    if (distancia1 < distancia2) {
+        return treina1;
+    }
+    if (distancia2 < distancia1) {
+        return treina2;
+    }
+}
+
 
 int main() {
 
     FILE *arq;
+
+    CentroPesquisa centro;
 
 }
