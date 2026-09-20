@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <math.h>
 
+#include "DADOPOKEMON.h"
+#include "POKELISTA.h"
+#include "DADOTREINADOR.h"
 #include "CENTRODEPESQUISA.h"
 
 #define MAX_TREINADOR 2
