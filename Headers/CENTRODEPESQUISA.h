@@ -18,7 +18,7 @@ void inserirFugitivo(CentroPesquisa* centro, Pokemon poke);
 void retiraFugitivo(CentroPesquisa* centro, Pokemon* poke);
 int fugitivosVazio(CentroPesquisa* centro);
 void imprimePokemonsFugitivos(CentroPesquisa* centro);
-void recebePokemonsRecuperados(CentroPesquisa* centro, ListaPokemon* lista);
+void recebePokemonsRecuperados(CentroPesquisa* centro, Treinador* treina);
 void recarregarPokebolas(Treinador* treinador);
 
 #endif

@@ -1,5 +1,8 @@
 #include "../Headers/CENTRODEPESQUISA.h"
 
+#include <stdlib.h>
+#include <time.h>
+
 void inicializaCentroPesquisa(CentroPesquisa* centro){
     FazListaPokemonVazia(&centro->fugitivos);
     FazListaPokemonVazia(&centro->recuperados);
@@ -23,7 +26,17 @@ int fugitivosVazio(CentroPesquisa* centro){
     return ListaPokemonVazia(&centro->fugitivos);
 }
 
-void recebePokemonsRecuperados(CentroPesquisa* centro, ListaPokemon* lista);
+void recebePokemonsRecuperados(CentroPesquisa* centro, Treinador* treina){
+    Pokemon a;
+    while(ListaPokemonVazia(&treina->pokemons)==1){
+        retiraPokemonDaListaTreinador(treina, &a);
+        inserirFugitivo(centro, a);
+    }
+}
 
-//tem que fazer essa funão escrever "Treinador(a) %s recebeu %d Pokébolas.\n""
-void recarregarPokebolas(Treinador* treinador);
+void recarregarPokebolas(Treinador* treinador){
+    srand(time(NULL));
+    int pokebolas = rand() % 20 + 1;
+    setPokebolas(treinador ,pokebolas);
+    printf("Treinador(a) %s recebeu %d Pokébolas.\n", treinador->nome, treinador->quantPokebolas);
+}

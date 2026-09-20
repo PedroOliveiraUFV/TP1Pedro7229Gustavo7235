@@ -28,12 +28,12 @@ int get_n_pokedex(Pokemon *poke) {
     return poke -> n_pokedex;
 }
 
-char *get_nome(Pokemon *poke) {
-    return poke -> nome;
+void get_nome(Pokemon *poke, char resposta[]) {
+    strcpy(resposta, (*poke).nome);
 }
 
-char *get_tipo(Pokemon *poke) {
-    return poke -> tipo;
+void get_tipo(Pokemon *poke, char resposta[]) {
+    strcpy(resposta, (*poke).tipo);
 }
 
 int get_cordx(Pokemon *poke) {

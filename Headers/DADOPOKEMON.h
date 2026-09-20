@@ -15,8 +15,8 @@ void inicializa_pokemon(Pokemon *poke, int numero, char nome[], char tipo[], int
 //get//
 
 int get_n_pokedex(Pokemon *poke);
-char *get_nome(Pokemon *poke);
-char *get_tipo(Pokemon *poke);
+void get_nome(Pokemon *poke, char resposta[]);
+void get_tipo(Pokemon *poke, char resposta[]);
 int get_cordx(Pokemon *poke);
 int get_cordy(Pokemon *poke);
 
