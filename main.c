@@ -94,6 +94,25 @@ Treinador *escolhe_treinador(Treinador *treina, Pokemon *poke) {
     return treinadorMaisProx;
 }
 
+void cria_relatorio(CentroPesquisa *centro) {
+    FILE *arq;
+
+    CelulaPokemon* aux = centro -> recuperados.cabecalho -> prox;
+    
+    arq = fopen("Relatorio.txt", "w");
+    if (arq == NULL) {
+        printf("Erro ao gerar o relatorio");
+        return;
+    }
+    fprintf(arq, "Pokemons Recuperados:\n");
+    while (aux != NULL) {
+        Pokemon recuperou = aux -> pokemon;
+        fprintf(arq, "%d %s\n", get_n_pokedex(&recuperou), recuperou.nome);
+
+        aux = aux -> prox;
+    }
+    fclose(arq);
+}
 
 int main() {
 
@@ -165,5 +184,6 @@ int main() {
     }
     missaoConcluida();
 
-    //escrever relatorio de pokemons repurados no relatorio.txt 
+    //escrever relatorio de pokemons repurados no relatorio.txt (feito)
+    cria_relatorio(&centro);
 }
