@@ -36,7 +36,7 @@ void retiraPokemonDaListaTreinador(Treinador* treinador, Pokemon* resul){
 
 //imprime o treinador//
 void imprimeTreinador(Treinador* treinador){
-    printf("Treinador(a) %s: posição (%d,%d) | Pokébolas: %d\n",
+    printf("Treinador(a) %s: posicao (%d,%d) | Pokebolas: %d\n",
             treinador->nome, treinador->cord_x, treinador->cord_y, treinador->quantPokebolas);
 }
 

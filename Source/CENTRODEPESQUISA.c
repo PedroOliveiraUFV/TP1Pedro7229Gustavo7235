@@ -1,6 +1,7 @@
 #include "../Headers/CENTRODEPESQUISA.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
 
 void inicializaCentroPesquisa(CentroPesquisa* centro){
@@ -19,7 +20,7 @@ void retiraFugitivo(CentroPesquisa* centro, Pokemon* poke){
 }
 
 void imprimePokemonsFugitivos(CentroPesquisa* centro){
-    printf("\nPokémons fugitivos a serem resgatados: %d\n", contaPokemonsDaLista(&centro->fugitivos));
+    printf("\nPokemons fugitivos a serem resgatados: %d\n", contaPokemonsDaLista(&centro->fugitivos));
 }
 
 int fugitivosVazio(CentroPesquisa* centro){
@@ -28,9 +29,9 @@ int fugitivosVazio(CentroPesquisa* centro){
 
 void recebePokemonsRecuperados(CentroPesquisa* centro, Treinador* treina){
     Pokemon a;
-    while(ListaPokemonVazia(&treina->pokemons)==1){
+    while(ListaPokemonVazia(&treina->pokemons)==0){
         retiraPokemonDaListaTreinador(treina, &a);
-        inserirFugitivo(centro, a);
+        InsereNaListaPokemon(&centro->recuperados, a);
     }
 }
 
@@ -38,5 +39,5 @@ void recarregarPokebolas(Treinador* treinador){
     srand(time(NULL));
     int pokebolas = rand() % 20 + 1;
     setPokebolas(treinador ,pokebolas);
-    printf("Treinador(a) %s recebeu %d Pokébolas.\n", treinador->nome, treinador->quantPokebolas);
+    printf("Treinador(a) %s recebeu %d Pokebolas.\n", treinador->nome, treinador->quantPokebolas);
 }

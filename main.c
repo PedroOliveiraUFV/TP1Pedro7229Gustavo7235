@@ -8,10 +8,11 @@
 #include "CENTRODEPESQUISA.h"
 
 #define MAX_TREINADOR 2
+#define entrada "teste.txt"
 
 void inicioMissao(){
     printf("========================================\n");
-    printf("          INÍCIO DA MISSÃO              \n");
+    printf("          INICIO DA MISSAO              \n");
     printf("========================================\n\n");
 }
 
@@ -21,7 +22,7 @@ void linha(){
 
 void treinadorSemPokebolas(Treinador* trei){
     printf("\n========================================\n");
-    printf("       Treinador(a) %s SEM POKÉBOLAS  \n", trei->nome);
+    printf("       Treinador(a) %s SEM POKEBOLAS  \n", trei->nome);
     printf("========================================\n\n");
 }
 
@@ -33,7 +34,7 @@ void todosPokemonsResuperados(){
 
 void missaoConcluida(){
     printf("========================================\n");
-    printf("          MISSÃO CONCLUÍDA              \n");
+    printf("          MISSAO CONCLUIDA              \n");
     printf("========================================\n\n");
 }
 
@@ -87,8 +88,8 @@ Treinador *escolhe_treinador(Treinador *treina, Pokemon *poke) {
     double distanciaMaisProx = calcula_distancia(treina[0].cord_x, treina[0].cord_y, poke->cord_x, poke->cord_y);
     for(int i = 0; i<MAX_TREINADOR; i++){
         double distancia = calcula_distancia(treina[i].cord_x, treina[i].cord_y, poke->cord_x, poke->cord_y);
-        printf("Distância Treinador(a) %s: %.2f\n",treina[i].nome, distancia);
-        if(distancia<distanciaMaisProx){
+        printf("Distancia Treinador(a) %s: %.2f\n",treina[i].nome, distancia);
+        if(distancia<distanciaMaisProx || (distancia==distanciaMaisProx && treina[i].id<treinadorMaisProx->id)){
             treinadorMaisProx = &treina[i];
             distanciaMaisProx = distancia;
         }
@@ -117,10 +118,32 @@ void cria_relatorio(CentroPesquisa *centro) {
     fclose(arq);
 }
 
+void enviarResgate(CentroPesquisa *centro, Treinador *treinador) {
+    Pokemon fugitivo;
+    retiraFugitivo(centro, &fugitivo);
+    printf("Pokemon alvo: %s\n", fugitivo.nome);
+    printf("Localizacao: (%d,%d)\n\n", fugitivo.cord_x, fugitivo.cord_y);
+    Treinador *missionario = escolhe_treinador(treinador, &fugitivo);
+    printf("Missao atribuida ao Treinador(a) %s.\n\n", missionario->nome);
+    setCord(missionario, fugitivo.cord_x, fugitivo.cord_y);
+    capturaPokemon(missionario, fugitivo);
+    printf("Pokebolas restantes para o Treinador(a) %s: %d\n",missionario->nome, getPokebolas(missionario));
+
+    // Verifica se ficou sem Pokébolas
+    if (getPokebolas(missionario) == 0) {
+        treinadorSemPokebolas(missionario);
+        setCord(missionario, xCentro, yCentro);
+        printf("Treinador(a) %s retorna ao Centro de Pesquisa.\n\n",missionario->nome);
+        recebePokemonsRecuperados(centro, missionario);
+        printf("Entregando Pokemons ao Centro de Pesquisa.\n\n");
+        recarregarPokebolas(missionario);
+    }
+}
+
 int main() {
 
     //lendo o arquivo de entrada
-    FILE *arq = fopen("exemplo.txt", "r");
+    FILE *arq = fopen(entrada, "r");
 
     if(arq==NULL){
         printf("Erro ao ler a entrada\n");
@@ -155,23 +178,7 @@ int main() {
 
     //Pokemons alvos
     while(fugitivosVazio(&centro)!=1){
-        Pokemon fugitivo;
-        retiraFugitivo(&centro, &fugitivo);
-        printf("Pokemon alvo: %s\n", fugitivo.nome);
-        printf("Localização: (%d,%d)\n\n", fugitivo.cord_x, fugitivo.cord_y);
-        Treinador *missionario = escolhe_treinador(treinador, &fugitivo);
-        printf("Missão atribuída ao Treinador(a) %s.\n\n",missionario->nome);
-        setCord(missionario, fugitivo.cord_x, fugitivo.cord_y);
-        capturaPokemon(missionario, fugitivo);
-        printf("Pokébolas restantes para o Treinador(a) %s: %d\n", missionario->nome, getPokebolas(missionario));
-        if(getPokebolas(missionario) == 0){
-            treinadorSemPokebolas(missionario);
-            setCord(missionario, xCentro, yCentro);
-            printf("Treinador(a) %s retorna ao Centro de Pesquisa.\n\n", missionario->nome);
-            recebePokemonsRecuperados(&centro, missionario);
-            printf("Entregando Pokémons ao Centro de Pesquisa.\n\n");
-            recarregarPokebolas(missionario);
-        }
+        enviarResgate(&centro, treinador);
         linha();
     }
 
@@ -183,10 +190,12 @@ int main() {
     printf("Todos treinadores retornam ao Centro de Pesquisa.\n\n");
     for(int i = 0; i<MAX_TREINADOR; i++){
         recebePokemonsRecuperados(&centro, &treinador[i]);
-        printf("Treinador(a) %s devolve os Pokémon.\n\n",treinador[i].nome);
+        printf("Treinador(a) %s devolve os Pokemon.\n\n",treinador[i].nome);
     }
     missaoConcluida();
 
-    //escrever relatorio de pokemons repurados no relatorio.txt (feito)
+    //escrever relatorio de pokemons recuperados no relatorio.txt
     cria_relatorio(&centro);
+
+    return 0;
 }
