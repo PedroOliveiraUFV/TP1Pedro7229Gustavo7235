@@ -1,0 +1,15 @@
+Luna 3
+Dante 2
+12
+25 Pikachu Eletrico 8 6
+133 Eevee Normal 3 4
+150 Mewtwo Psiquico -12 9
+6 Charizard Fogo 10 10
+448 Lucario Lutador 2 3
+282 Gardevoir Psiquico -5 -7
+359 Absol Noturno 6 -4
+94 Gengar Fantasma -8 2
+445 Garchomp Dragao 12 -6
+131 Lapras Agua 0 8
+197 Umbreon Noturno -3 -3
+143 Snorlax Normal 1 1
