@@ -17,7 +17,7 @@ Organização dos arquivos
 ├── Makefile
 └── README.md
 
-Como compilar
+Como compilar no windows
 É necessário ter o GCC e o Make instalados.
 No terminal, execute:
 mingw32-make
@@ -28,4 +28,14 @@ Como executar
 
 Após a compilação, execute:
 
+./programa
+
+
+Caso esteja no Linux:
+Abra o terminal dentro da pasta raiz
+Execute o comando cd build
+depois utilize cmake ..
+por fim utilize cmake --build .
+
+Após isso, execute:
 ./programa
