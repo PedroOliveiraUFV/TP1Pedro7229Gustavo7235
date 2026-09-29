@@ -44,3 +44,6 @@ por fim utilize cmake --build .
 Após isso, execute:
 
 ./programa
+
+(Windows): Caso queira utilizar outros arquivos de teste.É necessário fazer a troca com o arquivo de teste já existente na pasta raiz do projeto, mantendo o seu nome. (teste.txt).
+(Linux): Realize a troca do arquivo, dentro da pasta build do projeto.(teste.txt)
