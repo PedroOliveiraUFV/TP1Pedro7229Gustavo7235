@@ -35,11 +35,11 @@ Caso esteja no Linux:
 
 Abra o terminal dentro da pasta raiz
 
-Execute o comando cd build
+Execute o comando: cd build
 
-depois utilize cmake ..
+depois utilize: cmake ..
 
-por fim utilize cmake --build .
+por fim utilize: cmake --build .
 
 Após isso, execute:
 
