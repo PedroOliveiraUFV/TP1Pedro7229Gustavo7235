@@ -53,6 +53,7 @@ void ImprimirListaPokemon(ListaPokemon* lista){
     }
 }
 
+//funcao contadora de pokemons na lista//
 int contaPokemonsDaLista(ListaPokemon *lista) {
     CelulaPokemon *a = lista->cabecalho;
     int cont = 0;
