@@ -119,6 +119,7 @@ void cria_relatorio(CentroPesquisa *centro) {
 
         aux = aux -> prox;
     }
+    free(aux);
     fclose(arq);
 }
 
