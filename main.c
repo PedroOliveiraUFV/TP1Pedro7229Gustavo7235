@@ -10,6 +10,7 @@
 #define MAX_TREINADOR 2
 #define entrada "teste.txt"
 
+//funcoes auxiliares para impressao de mensagens//
 void inicioMissao(){
     printf("========================================\n");
     printf("          INICIO DA MISSAO              \n");
@@ -51,6 +52,7 @@ int ler_treinadores(FILE *arq, Treinador *treinadores) {
     return 1;
 }
 
+//funcoes auxiliares para leitura de arquivos//
 int ler_pokemons(FILE *arq, CentroPesquisa *centro) {
     int quant, num_pokedex;
     char nome[50], tipo[30];
@@ -74,6 +76,7 @@ int ler_pokemons(FILE *arq, CentroPesquisa *centro) {
     return 1;
 }
 
+//funcoes para calculo de distancia e escolha do treinador mais proximo//
 double calcula_distancia (int x1, int y1, int x2, int y2) {
     double dx, dy;
 
@@ -98,6 +101,7 @@ Treinador *escolhe_treinador(Treinador *treina, Pokemon *poke) {
     return treinadorMaisProx;
 }
 
+//funcao para criar o relatorio//
 void cria_relatorio(CentroPesquisa *centro) {
     FILE *arq;
 
@@ -118,6 +122,7 @@ void cria_relatorio(CentroPesquisa *centro) {
     fclose(arq);
 }
 
+//funcao principal que organiza a missao//
 void enviarResgate(CentroPesquisa *centro, Treinador *treinador) {
     Pokemon fugitivo;
     retiraFugitivo(centro, &fugitivo);
@@ -142,7 +147,7 @@ void enviarResgate(CentroPesquisa *centro, Treinador *treinador) {
 
 int main() {
 
-    //lendo o arquivo de entrada
+    //lendo o arquivo de entrada//
     FILE *arq = fopen(entrada, "r");
 
     if(arq==NULL){
@@ -169,20 +174,20 @@ int main() {
 
     fclose(arq);
 
-    //iniciando a missão
+    //iniciando a missão//
     inicioMissao();
     for(int i = 0; i<MAX_TREINADOR;i++){
         imprimeTreinador(&treinador[i]);
     }
     linha();
 
-    //Pokemons alvos
+    //Pokemons alvos//
     while(fugitivosVazio(&centro)!=1){
         enviarResgate(&centro, treinador);
         linha();
     }
 
-    //fim da missão
+    //fim da missão//
     todosPokemonsResuperados();
     for(int i = 0; i<MAX_TREINADOR; i++){
         setCord(&treinador[i], xCentro, yCentro);
@@ -194,7 +199,7 @@ int main() {
     }
     missaoConcluida();
 
-    //escrever relatorio de pokemons recuperados no relatorio.txt
+    //escreve relatorio de pokemons recuperados//
     cria_relatorio(&centro);
 
     return 0;
