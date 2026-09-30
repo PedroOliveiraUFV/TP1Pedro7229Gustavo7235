@@ -39,6 +39,7 @@ void missaoConcluida(){
     printf("========================================\n\n");
 }
 
+//funcoes auxiliares para leitura de arquivos//
 int ler_treinadores(FILE *arq, Treinador *treinadores) {
     char nome[50];
     int pokebolas;
@@ -52,7 +53,6 @@ int ler_treinadores(FILE *arq, Treinador *treinadores) {
     return 1;
 }
 
-//funcoes auxiliares para leitura de arquivos//
 int ler_pokemons(FILE *arq, CentroPesquisa *centro) {
     int quant, num_pokedex;
     char nome[50], tipo[30];
